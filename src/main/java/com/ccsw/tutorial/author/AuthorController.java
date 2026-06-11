@@ -82,8 +82,7 @@ public class AuthorController {
      */
     @Operation(summary = "Delete", description = "Method that deletes a Author")
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id) throws Exception {
-
+    public void delete(@PathVariable("id") Long id){
         this.authorService.delete(id);
     }
 

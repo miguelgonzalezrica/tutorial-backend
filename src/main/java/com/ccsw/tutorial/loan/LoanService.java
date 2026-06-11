@@ -43,6 +43,6 @@ public interface LoanService {
      *
      * @param id PK de la entidad
      */
-    void delete(Long id) throws Exception;
+    void delete(Long id);
 
 }

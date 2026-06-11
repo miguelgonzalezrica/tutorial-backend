@@ -3,6 +3,7 @@ package com.ccsw.tutorial.author;
 import com.ccsw.tutorial.author.model.Author;
 import com.ccsw.tutorial.author.model.AuthorDto;
 import com.ccsw.tutorial.author.model.AuthorSearchDto;
+import com.ccsw.tutorial.common.exception.DeleteNonExistingEntityException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,10 +71,10 @@ public class AuthorServiceImpl implements AuthorService {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Long id) throws Exception {
+    public void delete(Long id) {
 
         if(this.get(id) == null){
-            throw new Exception("Not exists");
+            throw new DeleteNonExistingEntityException("Author does not exist");
         }
 
         this.authorRepository.deleteById(id);

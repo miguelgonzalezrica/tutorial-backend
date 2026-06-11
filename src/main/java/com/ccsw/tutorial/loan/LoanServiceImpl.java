@@ -1,10 +1,10 @@
 package com.ccsw.tutorial.loan;
 
-import com.ccsw.tutorial.author.AuthorService;
 import com.ccsw.tutorial.client.ClientService;
 import com.ccsw.tutorial.common.criteria.SearchCriteria;
-import com.ccsw.tutorial.client.ClientRepository;
-import com.ccsw.tutorial.game.GameRepository;
+import com.ccsw.tutorial.common.exception.ClientAlreadyHasTwoLoansException;
+import com.ccsw.tutorial.common.exception.DeleteNonExistingEntityException;
+import com.ccsw.tutorial.common.exception.GameAlreadyHasALoanException;
 import com.ccsw.tutorial.game.GameService;
 import com.ccsw.tutorial.loan.model.Loan;
 import com.ccsw.tutorial.loan.model.LoanDto;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 /**
  * @author migonza
@@ -79,29 +78,25 @@ public class LoanServiceImpl implements LoanService {
         LocalDate start = data.getLoanDate();
         LocalDate end = data.getReturnDate();
 
-        if (start == null || end == null) {
-            throw new RuntimeException("Las fechas de inicio y fin de préstamo son obligatorias");
-        }
-
         if (end.isBefore(start)) {
-            throw new RuntimeException("La fecha de devolución debe ser posterior o igual a la de recogida");
+            throw new IllegalArgumentException("La fecha de devolución debe ser posterior o igual a la de recogida");
         }
 
         long days = ChronoUnit.DAYS.between(start, end);
         if (days > 14) {
-            throw new RuntimeException("El alquiler no puede exceder los 14 días");
+            throw new IllegalArgumentException("El alquiler no puede exceder los 14 días");
         }
 
         boolean gameOverlap = loanRepository.existsOverlappingGameLoan(data.getGame().getId(),id,start,end);
 
         if (gameOverlap) {
-            throw new RuntimeException("El juego ya está prestado en ese rango de fechas");
+            throw new GameAlreadyHasALoanException("El juego ya está prestado en ese rango de fechas");
         }
 
         for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) {
             long count = loanRepository.countClientLoansOnDate(data.getClient().getId(),id,d);
             if (count >= 2) {
-                throw new RuntimeException("El cliente ya tiene dos juegos alquilados para ese día");
+                throw new ClientAlreadyHasTwoLoansException("El cliente ya tiene dos juegos alquilados para ese día");
             }
         }
 
@@ -112,10 +107,10 @@ public class LoanServiceImpl implements LoanService {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Long id) throws Exception {
+    public void delete(Long id) {
 
         if(this.get(id) == null){
-            throw new Exception("Not exists");
+            throw new DeleteNonExistingEntityException("Loan does not exist");
         }
 
         this.loanRepository.deleteById(id);

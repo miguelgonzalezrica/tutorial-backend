@@ -63,7 +63,7 @@ public class ClientController {
      */
     @Operation(summary = "Delete", description = "Method that deletes a Client")
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id) throws Exception {
+    public void delete(@PathVariable("id") Long id) {
 
         this.clientService.delete(id);
     }

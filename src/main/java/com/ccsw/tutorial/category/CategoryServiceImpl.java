@@ -2,6 +2,7 @@ package com.ccsw.tutorial.category;
 
 import com.ccsw.tutorial.category.model.Category;
 import com.ccsw.tutorial.category.model.CategoryDto;
+import com.ccsw.tutorial.common.exception.DeleteNonExistingEntityException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,10 +61,10 @@ public class CategoryServiceImpl implements CategoryService {
      * {@inheritDoc}
      */
     @Override
-    public void delete(Long id) throws Exception {
+    public void delete(Long id) {
 
         if(this.get(id) == null){
-            throw new Exception("Not exists");
+            throw new DeleteNonExistingEntityException("Category does not exist");
         }
 
         this.categoryRepository.deleteById(id);

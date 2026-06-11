@@ -49,8 +49,6 @@ public class GameServiceImpl implements GameService {
         GameSpecification titleSpec = new GameSpecification(new SearchCriteria("title", ":", title));
         GameSpecification categorySpec = new GameSpecification(new SearchCriteria("category.id", ":", idCategory));
 
-        //Specification<Game> spec = Specification.where(titleSpec).and(categorySpec);
-        // Desde la versión 3.5.0 de Spring Boot, la nueva manera es
         Specification<Game> spec = titleSpec.and(categorySpec);
 
         return this.gameRepository.findAll(spec);
