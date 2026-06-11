@@ -1,8 +1,10 @@
 package com.ccsw.tutorial.loan.model;
 
+import com.ccsw.tutorial.client.model.Client;
+import com.ccsw.tutorial.game.model.Game;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @author migonza
@@ -17,17 +19,19 @@ public class Loan {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "gameName", nullable = false)
-    private String gameName;
+    @ManyToOne
+    @JoinColumn(name = "game_id", nullable = false)
+    private Game game;
 
-    @Column(name = "clientName")
-    private String clientName;
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
 
     @Column(name = "loanDate")
-    private Date loanDate;
+    private LocalDate loanDate;
 
     @Column(name = "returnDate")
-    private Date returnDate;
+    private LocalDate returnDate;
 
     /**
      * @return id
@@ -44,58 +48,58 @@ public class Loan {
     }
 
     /**
-     * @return gameName
+     * @return game
      */
-    public String getGameName() {
-        return this.gameName;
+    public Game getGame() {
+        return this.game;
     }
 
     /**
-     * @param gameName new value of {@link #getGameName}.
+     * @param game new value of {@link #getGame}.
      */
-    public void setSameName(String gameName) {
-        this.gameName = gameName;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     /**
-     * @return clientName
+     * @return client
      */
-    public String getClientName() {
-        return this.clientName;
+    public Client getClient() {
+        return this.client;
     }
 
     /**
-     * @param clientName new value of {@link #getClientName}.
+     * @param client new value of {@link #getClient}.
      */
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     /**
      * @return loanDate
      */
-    public Date getLoanDate() {
+    public LocalDate getLoanDate() {
         return this.loanDate;
     }
 
     /**
      * @param loanDate new value of {@link #getLoanDate}.
      */
-    public void setLoanDate(Date loanDate) {
+    public void setLoanDate(LocalDate loanDate) {
         this.loanDate = loanDate;
     }
 
     /**
      * @return returnDate
      */
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return this.returnDate;
     }
 
     /**
      * @param returnDate new value of {@link #getReturnDate}.
      */
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 }

@@ -27,13 +27,18 @@ VALUES
     ('Miguel Pires'),
     ('Marcos Platero'),
     ('Daniel Deltoya'),
-    ('Pablo Otamendi ');
+    ('Francisco Juárez'),
+    ('Pablo Otamendi'),
+    ('Marta Alcalá');
 
-INSERT INTO loan(game_name, client_name, loan_date, return_date)
+INSERT INTO loan(game_id, client_id, loan_date, return_date)
 VALUES
-    ('On Mars', 'Miguel Pires', '2026-06-05', '2026-06-10'),
-    ('Aventureros al tren', 'Miguel Pires', '2026-06-09', '2026-06-15'),
-    ('1920: Wall Street', 'Pablo Otamendi', '2026-06-10', '2026-06-20'),
-    ('Azul', 'Marcos Platero', '2026-06-18', '2026-06-28');
+    (1, 1, '2026-06-05', '2026-06-10'),
+    (2, 1, '2026-06-09', '2026-06-15'),
+    (3, 5, '2026-06-10', '2026-06-20'),
+    (6, 6, '2026-07-10', '2026-07-20'),
+    (4, 3, '2026-06-10', '2026-06-12'),
+    (4, 3, '2026-06-13', '2026-06-15'),
+    (6, 2, '2026-06-18', '2026-06-28');
 
 

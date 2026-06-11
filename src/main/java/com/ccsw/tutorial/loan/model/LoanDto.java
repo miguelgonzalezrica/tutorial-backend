@@ -1,4 +1,8 @@
 package com.ccsw.tutorial.loan.model;
+import com.ccsw.tutorial.client.model.ClientDto;
+import com.ccsw.tutorial.game.model.GameDto;
+
+import java.time.LocalDate;
 
 /**
  * @author migonza
@@ -8,13 +12,13 @@ public class LoanDto {
 
     private Long id;
 
-    private String gameName;
+    private GameDto game;
 
-    private String clientName;
+    private ClientDto client;
 
-    private String loanDate;
+    private LocalDate loanDate;
 
-    private String returnDate;
+    private LocalDate returnDate;
 
     /**
      * @return id
@@ -35,39 +39,39 @@ public class LoanDto {
     /**
      * @return gameName
      */
-    public String getGameName() {
+    public GameDto getGame() {
 
-        return this.gameName;
+        return this.game;
     }
 
     /**
-     * @param gameName new value of {@link #getGameName}.
+     * @param game new value of {@link #getGame}.
      */
-    public void setGameName(String gameName) {
+    public void setGame(GameDto game) {
 
-        this.gameName = gameName;
+        this.game = game;
     }
 
     /**
-     * @return clientName
+     * @return client
      */
-    public String getClientName() {
+    public ClientDto getClient() {
 
-        return this.clientName;
+        return this.client;
     }
 
     /**
-     * @param clientName new value of {@link #getClientName}.
+     * @param client new value of {@link #getClient}.
      */
-    public void setClientName(String clientName) {
+    public void setClient(ClientDto client) {
 
-        this.clientName = clientName;
+        this.client = client;
     }
 
     /**
      * @return loanDate
      */
-    public String getLoanDate() {
+    public LocalDate getLoanDate() {
 
         return this.loanDate;
     }
@@ -75,7 +79,7 @@ public class LoanDto {
     /**
      * @param loanDate new value of {@link #getLoanDate}.
      */
-    public void setLoanDate(String loanDate) {
+    public void setLoanDate(LocalDate loanDate) {
 
         this.loanDate = loanDate;
     }
@@ -83,7 +87,7 @@ public class LoanDto {
     /**
      * @return returnDate
      */
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
 
         return this.returnDate;
     }
@@ -91,7 +95,7 @@ public class LoanDto {
     /**
      * @param returnDate new value of {@link #getReturnDate}.
      */
-    public void setReturnDate(String returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
 
         this.returnDate = returnDate;
     }

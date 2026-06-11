@@ -31,6 +31,23 @@ public class AuthorController {
     ModelMapper mapper;
 
     /**
+     * Método obtener todos los {@link Author}
+     *
+     * @return {@link Page} de {@link AuthorDto}
+     */
+    @Operation(summary = "Find All", description = "Get all authors")
+    @RequestMapping(path = "", method = RequestMethod.GET)
+    public List<AuthorDto> findAll() {
+
+        List<Author> authors = this.authorService.findAll();
+
+        return authors.stream()
+                .map(e -> mapper.map(e, AuthorDto.class))
+                .collect(Collectors.toList());
+    }
+
+
+    /**
      * Método para recuperar un listado paginado de {@link Author}
      *
      * @param dto dto de búsqueda

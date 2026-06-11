@@ -1,5 +1,7 @@
 package com.ccsw.tutorial.loan;
 
+import com.ccsw.tutorial.author.model.Author;
+import com.ccsw.tutorial.author.model.AuthorDto;
 import com.ccsw.tutorial.loan.model.Loan;
 import com.ccsw.tutorial.loan.model.LoanDto;
 import com.ccsw.tutorial.loan.model.LoanSearchDto;
@@ -9,9 +11,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 /**
@@ -38,12 +42,9 @@ public class LoanController {
      */
     @Operation(summary = "Find Page", description = "Method that return a page of Loans")
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public Page<LoanDto> findPage(@RequestBody LoanSearchDto dto) {
-        //TODO REMOVE
-        System.out.println("estoy buscando");
+    public Object findPage(@RequestBody LoanSearchDto dto) {
         Page<Loan> page = this.loanService.findPage(dto);
-
-        return new PageImpl<>(page.getContent().stream().map(e -> mapper.map(e, LoanDto.class)).collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
+        return page.map(loan -> this.mapper.map(loan, LoanDto.class));
     }
 
     /**
@@ -54,9 +55,8 @@ public class LoanController {
      */
     @Operation(summary = "Save or Update", description = "Method that saves or updates a Loan")
     @RequestMapping(path = { "", "/{id}" }, method = RequestMethod.PUT)
+
     public void save(@PathVariable(name = "id", required = false) Long id, @RequestBody LoanDto dto) {
-        //TODO REMOVE
-        System.out.println("estoy creando");
         this.loanService.save(id, dto);
     }
 

@@ -12,6 +12,14 @@ import java.util.List;
 public interface GameService {
 
     /**
+     * Recupera el juego a partir de su id
+     *
+     * @param id PK de del juego
+     * @return {@link Game}
+     */
+    Game get(Long id);
+
+    /**
      * Recupera los juegos filtrando opcionalmente por título y/o categoría
      *
      * @param title título del juego

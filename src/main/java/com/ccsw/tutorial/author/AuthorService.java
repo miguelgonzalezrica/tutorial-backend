@@ -14,6 +14,13 @@ import java.util.List;
 public interface AuthorService {
 
     /**
+     * Obtiene una lista de todos los {@link Author}
+     *
+     * @return {@link List} de {@link Author}
+     */
+    List<Author> findAll();
+
+    /**
      * Recupera un {@link Author} a través de su ID
      *
      * @param id PK de la entidad

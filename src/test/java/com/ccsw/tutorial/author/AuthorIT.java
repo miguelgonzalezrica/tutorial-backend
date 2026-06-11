@@ -39,7 +39,8 @@ public class AuthorIT {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    ParameterizedTypeReference<ResponsePage<AuthorDto>> responseTypePage = new ParameterizedTypeReference<ResponsePage<AuthorDto>>(){};
+    ParameterizedTypeReference<ResponsePage<AuthorDto>> responseTypePage = new ParameterizedTypeReference<ResponsePage<AuthorDto>>() {
+    };
 
     @Test
     public void findFirstPageWithFiveSizeShouldReturnFirstFiveResults() {

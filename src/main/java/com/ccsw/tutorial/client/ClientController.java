@@ -57,7 +57,7 @@ public class ClientController {
     }
 
     /**
-     * Método para crear o actualizar un {@link Client}
+     * Método para eliminar un {@link Client}
      *
      * @param id PK de la entidad
      */

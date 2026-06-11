@@ -83,7 +83,7 @@ public class ClientServiceImpl implements ClientService {
         if(this.get(id) == null){
             throw new Exception("Not exists");
         }
-
+        System.out.println(id);
         this.clientRepository.deleteById(id);
     }
 

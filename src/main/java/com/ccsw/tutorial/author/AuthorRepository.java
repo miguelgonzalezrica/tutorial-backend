@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * @author ccsw
  *
@@ -19,4 +21,5 @@ public interface AuthorRepository extends CrudRepository<Author, Long> {
      */
     Page<Author> findAll(Pageable pageable);
 
+    List<Author> findAll();
 }
