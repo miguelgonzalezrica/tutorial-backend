@@ -20,24 +20,24 @@ public class LoanSearchDto {
         this.pageable = pageable;
     }
 
-    private String gameTitle;
-    private String clientName;
+    private Number gameId;
+    private Number clientId;
     private LocalDate activeDate;
 
-    public String getGameTitle() {
-        return gameTitle;
+    public Number getGameId() {
+        return gameId;
     }
 
-    public void setGameTitle(String gameTitle) {
-        this.gameTitle = gameTitle;
+    public void setGameId(Number gameId) {
+        this.gameId = gameId;
     }
 
-    public String getClientName() {
-        return clientName;
+    public Number getClientId() {
+        return clientId;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setClientId(Number clientId) {
+        this.clientId = clientId;
     }
 
     public LocalDate getActiveDate() {

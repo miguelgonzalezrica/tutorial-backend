@@ -46,10 +46,12 @@ public class LoanIT {
     public static final String SERVICE_PATH = "/loan";
 
     private static final String NOT_EXISTS_GAME_TITLE = "NotExists";
-    private static final String EXISTS_GAME_TITLE = "On Mars";
+    private static final Long NOT_EXISTS_GAME_ID = 7L;
+    private static final Long EXISTS_GAME_ID = 1L;
     private static final String EXPECTED_GAME_TITLE = "Azul";
+    private static final Long NOT_EXISTS_CLIENT_ID = 7L;
     private static final String NOT_EXISTS_CLIENT_NAME = "NotExists";
-    private static final String EXISTS_CLIENT_NAME = "Miguel Pires";
+    private static final Long EXISTS_CLIENT_ID = 1L;
     private static final String EXPECTED_CLIENT_NAME = "Marta Alcalá";
 
     private static final String NEW_LOAN_DATE = "2026-09-20";
@@ -111,7 +113,7 @@ public class LoanIT {
 
         LoanSearchDto searchDto = new LoanSearchDto();
         searchDto.setPageable(new PageableRequest(0, PAGE_SIZE));
-        searchDto.setGameTitle(EXISTS_GAME_TITLE);
+        searchDto.setGameId(EXISTS_GAME_ID);
 
         ResponseEntity<ResponsePage<LoanDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
 
@@ -126,7 +128,7 @@ public class LoanIT {
 
         LoanSearchDto searchDto = new LoanSearchDto();
         searchDto.setPageable(new PageableRequest(0, PAGE_SIZE));
-        searchDto.setClientName(EXISTS_CLIENT_NAME);
+        searchDto.setClientId(EXISTS_CLIENT_ID);
 
         ResponseEntity<ResponsePage<LoanDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
 
@@ -141,8 +143,8 @@ public class LoanIT {
 
         LoanSearchDto searchDto = new LoanSearchDto();
         searchDto.setPageable(new PageableRequest(0, PAGE_SIZE));
-        searchDto.setClientName(EXISTS_CLIENT_NAME);
-        searchDto.setGameTitle(EXISTS_GAME_TITLE);
+        searchDto.setClientId(EXISTS_CLIENT_ID);
+        searchDto.setGameId(EXISTS_GAME_ID);
 
         ResponseEntity<ResponsePage<LoanDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
 
@@ -157,7 +159,7 @@ public class LoanIT {
 
         LoanSearchDto searchDto = new LoanSearchDto();
         searchDto.setPageable(new PageableRequest(0, PAGE_SIZE));
-        searchDto.setGameTitle(NOT_EXISTS_GAME_TITLE);
+        searchDto.setGameId(NOT_EXISTS_GAME_ID);
 
         ResponseEntity<ResponsePage<LoanDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
 
@@ -172,7 +174,7 @@ public class LoanIT {
 
         LoanSearchDto searchDto = new LoanSearchDto();
         searchDto.setPageable(new PageableRequest(0, PAGE_SIZE));
-        searchDto.setClientName(NOT_EXISTS_CLIENT_NAME);
+        searchDto.setClientId(NOT_EXISTS_CLIENT_ID);
 
         ResponseEntity<ResponsePage<LoanDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
 
@@ -187,8 +189,8 @@ public class LoanIT {
 
         LoanSearchDto searchDto = new LoanSearchDto();
         searchDto.setPageable(new PageableRequest(0, PAGE_SIZE));
-        searchDto.setClientName(NOT_EXISTS_CLIENT_NAME);
-        searchDto.setGameTitle(NOT_EXISTS_GAME_TITLE);
+        searchDto.setClientId(NOT_EXISTS_CLIENT_ID);
+        searchDto.setGameId(NOT_EXISTS_GAME_ID);
 
         ResponseEntity<ResponsePage<LoanDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
         assertNotNull(response);
@@ -196,7 +198,7 @@ public class LoanIT {
 
         LoanSearchDto searchDtoC = new LoanSearchDto();
         searchDtoC.setPageable(new PageableRequest(0, PAGE_SIZE));
-        searchDtoC.setClientName(NOT_EXISTS_CLIENT_NAME);
+        searchDtoC.setClientId(NOT_EXISTS_CLIENT_ID);
 
         ResponseEntity<ResponsePage<LoanDto>> responseC = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
         assertNotNull(responseC);
@@ -204,7 +206,7 @@ public class LoanIT {
 
         LoanSearchDto searchDtoG = new LoanSearchDto();
         searchDtoG.setPageable(new PageableRequest(0, PAGE_SIZE));
-        searchDto.setGameTitle(NOT_EXISTS_GAME_TITLE);
+        searchDto.setGameId(NOT_EXISTS_GAME_ID);
 
         ResponseEntity<ResponsePage<LoanDto>> responseG = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.POST, new HttpEntity<>(searchDto), responseTypePage);
         assertNotNull(responseG);

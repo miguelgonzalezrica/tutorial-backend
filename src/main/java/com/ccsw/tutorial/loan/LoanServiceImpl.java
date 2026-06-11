@@ -52,8 +52,8 @@ public class LoanServiceImpl implements LoanService {
      */
     @Override
     public Page<Loan> findPage(LoanSearchDto dto) {
-        LoanSpecification gameNameSpec = new LoanSpecification(new SearchCriteria("game.title", ":", dto.getGameTitle()));
-        LoanSpecification clientNameSpec = new LoanSpecification(new SearchCriteria("client.name", ":", dto.getClientName()));
+        LoanSpecification gameNameSpec = new LoanSpecification(new SearchCriteria("game.id", ":", dto.getGameId()));
+        LoanSpecification clientNameSpec = new LoanSpecification(new SearchCriteria("client.id", ":", dto.getClientId()));
         LoanSpecification loanDateSpec = new LoanSpecification(new SearchCriteria("loanDate", "<=", dto.getActiveDate()));
         LoanSpecification returnDateSpec = new LoanSpecification(new SearchCriteria("returnDate", ">=", dto.getActiveDate()));
         Specification<Loan> spec = gameNameSpec.and(clientNameSpec).and(loanDateSpec).and(returnDateSpec);

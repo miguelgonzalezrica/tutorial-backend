@@ -42,9 +42,10 @@ public class LoanController {
      */
     @Operation(summary = "Find Page", description = "Method that return a page of Loans")
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public Object findPage(@RequestBody LoanSearchDto dto) {
+    public Page<LoanDto> findPage(@RequestBody LoanSearchDto dto) {
         Page<Loan> page = this.loanService.findPage(dto);
-        return page.map(loan -> this.mapper.map(loan, LoanDto.class));
+
+        return new PageImpl<>(page.getContent().stream().map(e -> mapper.map(e, LoanDto.class)).collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
     }
 
     /**
