@@ -13,4 +13,4 @@ Se han implementado operaciones CRUD para las distintas entidades mediante endpo
 
 ## Base de datos
 
-Mediante un sencillo script .sql y el uso de Hibernate, e ha construido y gestionado la base de datos de la aplicación.
+Mediante un sencillo script .sql y el uso de Hibernate, se ha construido y gestionado la base de datos de la aplicación.
