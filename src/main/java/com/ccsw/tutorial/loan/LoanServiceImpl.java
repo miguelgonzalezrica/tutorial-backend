@@ -87,14 +87,27 @@ public class LoanServiceImpl implements LoanService {
             throw new IllegalArgumentException("El alquiler no puede exceder los 14 días");
         }
 
-        boolean gameOverlap = loanRepository.existsOverlappingGameLoan(data.getGame().getId(),id,start,end);
-
-        if (gameOverlap) {
+        boolean gameAlreadyHasLoan;
+        if (id == null) {
+            gameAlreadyHasLoan = loanRepository.existsByGameIdAndLoanDateLessThanEqualAndReturnDateGreaterThanEqual(
+                    data.getGame().getId(), end, start);
+        } else {
+            gameAlreadyHasLoan = loanRepository.existsByGameIdAndIdNotAndLoanDateLessThanEqualAndReturnDateGreaterThanEqual(
+                    data.getGame().getId(), id, end, start);
+        }
+        if (gameAlreadyHasLoan) {
             throw new GameAlreadyHasALoanException("El juego ya está prestado en ese rango de fechas");
         }
 
-        for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) {
-            long count = loanRepository.countClientLoansOnDate(data.getClient().getId(),id,d);
+        for (LocalDate d = start; d.isBefore(end.plusDays(1)); d = d.plusDays(1)) {
+            int count;
+            if (id == null) {
+                count = loanRepository.countByClientIdAndLoanDateLessThanEqualAndReturnDateGreaterThanEqual(
+                        data.getClient().getId(), d, d);
+            } else {
+                count = loanRepository.countByClientIdAndIdNotAndLoanDateLessThanEqualAndReturnDateGreaterThanEqual(
+                        data.getClient().getId(), id, d, d);
+            }
             if (count >= 2) {
                 throw new ClientAlreadyHasTwoLoansException("El cliente ya tiene dos juegos alquilados para ese día");
             }
